@@ -76,7 +76,7 @@ This repository is sanitized before publication using automated workflows to pre
 
 - **Credential Protection:** `.gitconfig` contains placeholder name and email configurations.
 - **State Exclusion:** Configuration files and history stores for tools like `atuin`, `sops`, `stripe`, SSH keys, GPG keys, and shell history are ignored globally via `.gitignore`.
-- **Path Virtualization:** All hardcoded absolute home paths (e.g., `/home/void/`) are virtualized to `$HOME` to ensure system compatibility.
+- **Path Virtualization:** All hardcoded absolute home paths (e.g., `/home/user/`) are virtualized to `$HOME` to ensure system compatibility.
 
 ### System Adjustments
 
