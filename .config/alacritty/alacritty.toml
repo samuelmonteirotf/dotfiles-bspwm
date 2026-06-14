@@ -1,0 +1,76 @@
+# ╔══════════════════════════════════════════════════════════╗
+# ║  alacritty · NEXUS · Red Team / Crimson                   ║
+# ╚══════════════════════════════════════════════════════════╝
+
+[env]
+TERM = "alacritty"
+
+[window]
+padding        = { x = 14, y = 14 }
+dynamic_padding = true
+decorations    = "none"
+opacity        = 0.92
+dynamic_title  = true
+
+[window.dimensions]
+columns = 110
+lines   = 30
+
+[scrolling]
+history = 10000
+
+[font]
+size = 11.0
+normal      = { family = "MesloLGL Nerd Font", style = "Regular" }
+bold        = { family = "MesloLGL Nerd Font", style = "Bold" }
+italic      = { family = "MesloLGL Nerd Font", style = "Italic" }
+bold_italic = { family = "MesloLGL Nerd Font", style = "Bold Italic" }
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+blink_interval = 600
+unfocused_hollow = true
+
+# ── Red Team / Crimson palette ──────────────────────────────
+[colors.primary]
+background = "#0b0c0e"
+foreground = "#d7dae0"
+dim_foreground = "#8a8f99"
+bright_foreground = "#f4f6fa"
+
+[colors.cursor]
+text   = "#0b0c0e"
+cursor = "#ff2b43"
+
+[colors.vi_mode_cursor]
+text   = "#0b0c0e"
+cursor = "#ff9e3d"
+
+[colors.selection]
+text       = "#f4f6fa"
+background = "#5c2731"
+
+[colors.normal]
+black   = "#14161a"
+red     = "#ff2b43"
+green   = "#3fb950"
+yellow  = "#ff9e3d"
+blue    = "#7a8aff"
+magenta = "#ff5563"
+cyan    = "#c41230"
+white   = "#d7dae0"
+
+[colors.bright]
+black   = "#3a3f47"
+red     = "#ff5563"
+green   = "#56d364"
+yellow  = "#ffc777"
+blue    = "#9aa6ff"
+magenta = "#ff7a86"
+cyan    = "#e0234a"
+white   = "#f4f6fa"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"

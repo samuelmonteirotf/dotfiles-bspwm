@@ -1,0 +1,28 @@
+# ╔══════════════════════════════════════════════════════════╗
+# ║  betterlockscreen · NEXUS · Red Team / Crimson            ║
+# ╚══════════════════════════════════════════════════════════╝
+# Efeito de fundo: blur do wallpaper
+blur_level=3
+dim_level=40
+wall_blur="0x6"
+
+# Anel (i3lock-color) em tons red team — FF0008/crimson
+insidecolor=0b0c0eaa
+ringcolor=ff0008ff
+keyhlcolor=ff5563ff
+bshlcolor=ff9e3dff
+separatorcolor=00000000
+insidevercolor=8a0f1daa
+insidewrongcolor=8a0f1daa
+ringvercolor=ff9e3dff
+ringwrongcolor=c41230ff
+verifcolor=f4f6faff
+timecolor=f4f6faff
+greetercolor=ff2b43ff
+layoutcolor=d7dae0ff
+keylayout=0
+
+# Texto
+time_format="%H:%M:%S"
+loginbox=0b0c0ecc
+font="MesloLGL Nerd Font"

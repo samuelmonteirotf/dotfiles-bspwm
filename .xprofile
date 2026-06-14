@@ -1,0 +1,8 @@
+# Lido na inicialização da sessão X (reforço das variáveis do bspwmrc)
+export QT_QPA_PLATFORMTHEME=qt5ct
+export XCURSOR_THEME=Bibata-Modern-Classic
+export XCURSOR_SIZE=24
+
+# Aceleração de hardware NVIDIA (VA-API / NVDEC)
+export LIBVA_DRIVER_NAME=nvidia
+export NVD_BACKEND=direct

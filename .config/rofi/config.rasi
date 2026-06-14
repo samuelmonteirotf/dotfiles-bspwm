@@ -1,0 +1,13 @@
+configuration {
+    modes:                      "drun,run,window";
+    show-icons:                 true;
+    icon-theme:                 "Papirus-Dark";
+    drun-display-format:        "{name}";
+    display-drun:               " run";
+    display-run:                " exec";
+    display-window:             " win";
+    location:                   0;
+    font:                       "MesloLGL Nerd Font 11";
+}
+
+@theme "redteam"

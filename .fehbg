@@ -1,0 +1,4 @@
+#!/bin/sh
+# Wallpaper fallback. The bspwm session sets this in bspwmrc; kept here so that
+# running `~/.fehbg` by hand restores a bundled wallpaper on any machine.
+feh --no-fehbg --bg-fill "$HOME/.config/wallpapers/chatgpt-wallpaper.png"

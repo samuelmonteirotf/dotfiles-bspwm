@@ -1,0 +1,9 @@
+# Repo-only files that must NOT be stowed into $HOME.
+# (one regex per line, matched against paths relative to the package root)
+\.git
+\.gitignore
+\.stow-local-ignore
+README.*
+LICENSE.*
+setup\.sh
+\.dotfiles-backup.*

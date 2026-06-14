@@ -1,0 +1,100 @@
+# ╔══════════════════════════════════════════════════════════╗
+# ║  dotfiles-bspwm · .gitignore                              ║
+# ║  Keep secrets, history, backups and noise out of git.    ║
+# ╚══════════════════════════════════════════════════════════╝
+
+# ── Secrets & credentials ───────────────────────────────────
+*.key
+*.pem
+*.gpg
+*.kbx
+*.asc
+*.jks
+*.keystore
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+*.ppk
+known_hosts
+authorized_keys
+.netrc
+.npmrc
+.yarnrc
+.pypirc
+secrets.*
+*.secret
+*credential*
+*token*
+.env
+.env.*
+*.env
+sops/
+.config/sops/
+stripe/
+.config/stripe/
+.config/atuin/
+.config/dconf/
+.config/gnupg/
+.gnupg/
+.ssh/
+
+# ── Shell / command history ─────────────────────────────────
+.zsh_history
+.bash_history
+.python_history
+.lesshst
+.node_repl_history
+.zcompdump*
+.zsh_sessions/
+
+# ── Editor & backup / temp files ────────────────────────────
+*.bak
+*.bak.*
+*.old
+*.orig
+*.swp
+*.swo
+*~
+*.tmp
+*.log
+.DS_Store
+.rice-backup-*/
+.dotfiles-backup-*/
+
+# ── Large binaries / archives / deliverables ────────────────
+*.zip
+*.tar
+*.tar.*
+*.tgz
+*.txz
+*.rar
+*.7z
+*.gz
+*.bz2
+*.xz
+*.zst
+*.apk
+*.aab
+*.iso
+*.img
+*.docx
+*.xlsx
+*.pptx
+
+# ── VM / infra definitions (libvirt domains, disk images) ───
+kali-*.xml
+*-vm.xml
+*.qcow2
+*.vmdk
+
+# ── Personal helper scripts (not part of the rice) ──────────
+redteam-*.sh
+
+# ── Runtime / cache cruft that can leak into config dirs ────
+*.pid
+*.socket
+.cache/
+__pycache__/
