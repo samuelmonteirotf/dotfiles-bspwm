@@ -1,26 +1,24 @@
-# dotfiles-bspwm · NEXUS Red Team / Crimson
+# dotfiles-bspwm - Declarative Unix Desktop Environment
 
-Personal **BSPWM** rice for Arch Linux (CachyOS), themed around a crimson
-"Red Team" palette. Everything here is symlinked into `$HOME` by `setup.sh`.
+This repository contains the declarative Configuration-as-Code (CoC) files for a hardened, performance-optimized bspwm desktop workspace on Arch Linux. Every component is managed modularly, allowing reproducible environments across workstation nodes.
 
 ```
-  WM        bspwm + sxhkd
-  Bar       polybar
-  Compositor picom (glx, dual-kawase blur)
-  Launcher  rofi (drun / clipboard / power / screenshot)
-  Notifs    dunst
-  Lock      betterlockscreen
-  Terminal  ghostty (primary) · alacritty (fallback)
-  Shell     zsh + starship + zoxide + atuin + fnm
-  Theme     GTK Graphite-red-Dark · Qt qt5ct (crimson) · Papirus-Dark · Bibata
-  Wallpaper feh
-  Fetch     fastfetch
+  Window Manager   bspwm + sxhkd
+  Status Bar       polybar
+  Compositor       picom (glx backend, dual-kawase blur)
+  App Launcher     rofi (drun, clipboard, power menu, screenshot utility)
+  Notifications    dunst
+  Lockscreen       betterlockscreen
+  Terminals        ghostty (primary), alacritty (fallback)
+  Shell            zsh + starship prompt + zoxide
+  Theming          GTK Graphite-red-Dark, Qt qt5ct (Crimson), Papirus-Dark, Bibata
+  Display Manager  feh (wallpaper configuration)
+  System Fetch     fastfetch
 ```
 
-## Layout
+## Repository Structure
 
-The repo mirrors the structure of `$HOME`, so the path of every file in the
-repo is exactly where it ends up on disk:
+The repository structure mirrors the `$HOME` directory layout. Configurations are systematically organized to allow direct symlinking:
 
 ```
 .config/
@@ -35,54 +33,55 @@ repo is exactly where it ends up on disk:
 setup.sh  .gitignore  .stow-local-ignore
 ```
 
-## Install
+## Workstation Deployment
+
+An automated shell installer handles workspace setup. The script is designed with standard DevOps reliability principles: it is fully idempotent, isolates failures per item, and executes dry-run simulations.
 
 ```sh
-git clone <this-repo> ~/dotfiles-bspwm
+# Clone the configuration-as-code workspace
+git clone git@github.com:samuelmonteirotf/dotfiles-bspwm.git ~/dotfiles-bspwm
 cd ~/dotfiles-bspwm
-./setup.sh --dry-run   # preview — changes nothing
-./setup.sh             # symlink everything, backing up conflicts
+
+# Execute a dry-run check to preview link targets and conflicts
+./setup.sh --dry-run
+
+# Run the installation
+./setup.sh
 ```
 
-`setup.sh`:
+### Installation Engine Specifications
 
-- **Symlinks** each entry into `$HOME` with `ln -sfn` (directories become
-  directory symlinks, single files become file symlinks).
-- **Backs up** anything already present to `~/.dotfiles-backup-<timestamp>/`
-  before linking — it never overwrites your files in place.
-- Is **idempotent**: re-running skips links that are already correct.
-- `--stow` delegates to GNU Stow instead of plain `ln`; `--uninstall` removes
-  the symlinks it created; `--help` lists options.
+The `setup.sh` installer operates under the following automation constraints:
 
-After installing, restart the WM with `super + alt + r` (`bspc wm -r`) or log
-back into the bspwm session.
+- **Backup Isolation:** If a conflicting configuration directory or file is found in `$HOME`, it is moved to a timestamped backup directory at `~/.dotfiles-backup-YYYYMMDD-HHMMSS/` prior to linking. It never overwrites user data in-place.
+- **Idempotency:** Re-running the script skips existing, correctly configured links and runs with zero overhead.
+- **Error Isolation:** Command failures during setup are isolated. If one item fails to link, the installer reports the failure, tracks it, and continues processing the remaining configuration items.
+- **Stow Compatibility:** Supports GNU Stow deployment. The `--stow` flag delegates linking to stow, using `.stow-local-ignore` to prevent installer scripts from polluting `$HOME`.
 
-## Dependencies
+To reload the workstation environment after deployment, restart bspwm using the binding `super + alt + r` (runs `bspc wm -r`).
 
-Core: `bspwm sxhkd polybar picom rofi dunst betterlockscreen feh fastfetch
-ghostty alacritty zsh starship`.
-Helpers referenced by the configs: `greenclip` (rofi clipboard), `maim`
-`xclip` `xdotool` (screenshots), `nvidia-smi`/`nvidia-settings` (GPU modules &
-bspwmrc tuning), `zoxide` `atuin` `fnm` `eza` `bat` `fzf` (shell).
-Fonts: `MesloLGL Nerd Font`, `FantasqueSansM Nerd Font`.
+## Package Dependencies
 
-## Notes & sanitization
+The dependencies required to run this environment are documented in the package lists.
 
-This repo was generated from a live system and **sanitized**:
+- **Core Workspace:** `bspwm`, `sxhkd`, `polybar`, `picom`, `rofi`, `dunst`, `betterlockscreen`, `feh`, `fastfetch`, `ghostty`, `alacritty`, `zsh`, `starship`.
+- **Workspace Helpers:** `rofi-greenclip` (clipboard manager), `maim`, `xclip`, `xdotool` (screenshot pipeline), `nvidia-smi`, `nvidia-settings` (GPU performance metrics), `zoxide` (directory navigation).
+- **Workstation Theming:** `ttf-meslo-nerd`, `papirus-icon-theme`, `qt5ct`, `graphite-gtk-theme`, `bibata-cursor-theme`.
 
-- `.gitconfig` ships with placeholder `user.name` / `user.email` — set your own
-  with `git config --global user.name/user.email`.
-- Hardcoded `/home/<user>` paths were replaced with `$HOME`.
-- No shell history, SSH/GPG keys, API tokens, or secret-manager state
-  (`atuin`, `sops`, `stripe`, …) are included; `.gitignore` keeps them out.
+The `.zshrc` integrates with CLI tools like `fnm`, `lazygit`, `yazi`, and `fzf`. Every tool is wrapped in guard checks (`command -v`), ensuring the shell loads cleanly even if optional utilities are missing.
 
-System-specific bits you may want to adjust:
+## Security and Sanitization Pipeline
 
-- `bspwmrc` / `.xprofile` assume a single **`DP-2`** output at **2560x1440@165**
-  with an **NVIDIA** GPU (G-Sync, PowerMizer, clock offsets). Edit the
-  `xrandr` / `nvidia-settings` lines for your hardware.
-- The polybar GPU/temp modules call `nvidia-smi` and read `coretemp` hwmon.
-- `qt5ct.conf` references the crimson palette via
-  `color_scheme_path=$HOME/.config/qt5ct/colors/redteam.conf`. qt5ct does **not**
-  expand `$HOME`, so if Qt apps don't pick up the crimson colors, open *qt5ct* and
-  re-select the **redteam** color scheme once (it rewrites the path absolutely).
+This repository is sanitized before publication using automated workflows to prevent data leaks:
+
+- **Credential Protection:** `.gitconfig` contains placeholder name and email configurations.
+- **State Exclusion:** Configuration files and history stores for tools like `atuin`, `sops`, `stripe`, SSH keys, GPG keys, and shell history are ignored globally via `.gitignore`.
+- **Path Virtualization:** All hardcoded absolute home paths (e.g., `/home/void/`) are virtualized to `$HOME` to ensure system compatibility.
+
+### System Adjustments
+
+You may need to modify specific hardware metrics in your workstation copy:
+
+- **Display Configuration:** `bspwmrc` and `.xprofile` configure a `DP-2` monitor output running at 2560x1440 at 165Hz. Adjust this to match your system display name and resolution.
+- **GPU Metrics:** Polybar temperature modules poll `nvidia-smi` and local CPU hwmon endpoints.
+- **Qt Theming:** `qt5ct.conf` points to the color scheme at `$HOME/.config/qt5ct/colors/redteam.conf`. Because qt5ct does not expand env variables natively, open the `qt5ct` GUI tool and re-save the redteam palette to resolve pathing on new installations.
