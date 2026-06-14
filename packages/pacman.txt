@@ -1,0 +1,67 @@
+# ════════════════════════════════════════════════════════════
+#  pacman.txt · pacotes dos repositórios OFICIAIS (núcleo do rice)
+#  Uso manual:  sudo pacman -S --needed - < packages/pacman.txt
+#  (o ./setup.sh --bootstrap instala isto automaticamente)
+#  Comentários com '#' e linhas em branco são ignorados.
+# ════════════════════════════════════════════════════════════
+
+# ── Servidor X (pule se já instalou no setup base do Arch) ──
+xorg-server
+xorg-xinit
+
+# ── Window manager & hotkeys ──
+bspwm
+sxhkd
+
+# ── Barra / compositor / launcher / notificações / wallpaper ──
+polybar
+picom
+rofi
+dunst
+feh
+
+# ── Terminais ──
+alacritty
+ghostty
+
+# ── Shell (núcleo) ──
+zsh
+starship
+zoxide
+atuin
+eza
+bat
+fzf
+fastfetch
+zsh-syntax-highlighting
+zsh-autosuggestions
+zsh-history-substring-search
+
+# ── Fonte Nerd + ícones + tema Qt ──
+ttf-meslo-nerd
+papirus-icon-theme
+qt5ct
+
+# ── Screenshots / clipboard / utilitários X ──
+maim
+xclip
+xdotool
+slop
+xorg-xrandr
+xorg-xset
+xorg-setxkbmap
+
+# ── Git (delta é o pager configurado no .gitconfig) ──
+git
+git-delta
+
+# ── Necessário para compilar pacotes do AUR ──
+base-devel
+
+# ── GPU NVIDIA (descomente se a SUA máquina for NVIDIA) ──
+#nvidia-utils
+#nvidia-settings
+
+# ── Áudio p/ o módulo pulseaudio da polybar (descomente o seu) ──
+#pipewire-pulse
+#pulseaudio

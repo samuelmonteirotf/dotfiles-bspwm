@@ -1,0 +1,10 @@
+# ════════════════════════════════════════════════════════════
+#  aur.txt · pacotes do AUR (precisam de um helper: paru/yay)
+#  O ./setup.sh --bootstrap detecta (ou instala) um helper e
+#  instala estes. Comentários com '#' e linhas em branco ignorados.
+# ════════════════════════════════════════════════════════════
+
+betterlockscreen      # lockscreen com blur (super+shift+x)
+rofi-greenclip        # histórico de clipboard p/ rofi (provê o binário 'greenclip')
+bibata-cursor-theme   # cursor Bibata-Modern-Classic
+graphite-gtk-theme    # tema GTK (gera a variante Graphite-red-Dark)
